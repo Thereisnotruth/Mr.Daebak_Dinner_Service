@@ -1,0 +1,266 @@
+.sidebar {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  height: 100%;
+  width: 200px;
+  transition: 0.3s ease-in;
+  background: #e0e0e0;
+  text-align: center;
+}
+
+.sidebar_header {
+  display: inline-block;
+  font-size: 24px;
+  margin: 20px;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+.sidebar_header:visited {
+  text-decoration: none;
+}
+.sidebar_header:hover {
+  text-decoration: none;
+}
+.sidebar_header:focus {
+  text-decoration: none;
+}
+.sidebar_header:hover, .sidebar_header:active {
+  text-decoration: none;
+}
+
+
+.sidebar_item {
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+.sidebar_item:visited {
+  text-decoration: none;
+}
+.sidebar_item:hover {
+  text-decoration: none;
+}
+.sidebar_item:focus {
+  text-decoration: none;
+}
+.sidebar_item:hover, .sidebar_item:active {
+  text-decoration: none;
+}
+
+.sidebar_login_button {
+  width: 100px;
+}
+
+
+.sidebar_login_link {
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+.sidebar_login_link:visited {
+  text-decoration: none;
+}
+.sidebar_login_link:hover {
+  text-decoration: none;
+}
+.sidebar_login_link:focus {
+  text-decoration: none;
+}
+.sidebar_login_link:hover, .sidebar_login_link:active {
+  text-decoration: none;
+}
+
+.main_header {
+  position: relative;
+  left: 50%;
+  font-size: 32px;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+.main_header:visited {
+  text-decoration: none;
+}
+.main_header:hover {
+  text-decoration: none;
+}
+.main_header:focus {
+  text-decoration: none;
+}
+.main_header:hover, .main_header:active {
+  text-decoration: none;
+}
+
+.wrapper {
+  position: absolute;
+  left: 200px;
+  width: calc(100% - 200px);
+}
+
+.main_subheader {
+  position: relative;
+  left: 50%;
+  font-size: 16px;
+  text-align: right;
+  width: 400px;
+  font-weight: bold;
+}
+
+.divider {
+  position: relative;
+  font-size: 24px;
+  text-align: center;
+  font-weight: bold;
+  z-index: -1;
+}
+.divider_line {
+  position: relative;
+  top: 50%;
+  z-index: -1;
+}
+
+.dinner_image {
+  height: 200px;
+  background: #E0E0E0;
+  margin: 5px;
+  font-size: 24px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.dinner_image:active {
+  position: absolute;
+  left: 20%;
+  width: 60%;
+  height: 400px;
+}
+.dinner_image:hover {
+  cursor: pointer;
+}
+.dinner_name {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.login_form_left {
+  position: relative;
+  left: 30%;
+  font-size: 20px;
+  font-weight: bold;
+  height: 40px;
+  transform: translate(0, 50%);
+}
+
+.login_form_right {
+  position: relative;
+  font-size: 20px;
+  font-weight: bold;
+  height: 20px;
+  transform: translate(0, 50%);
+}
+
+
+.login_button {
+  width: 100px;
+  position: relative;
+  left: calc(50% - 100px);
+}
+
+.register_form_left {
+  position: relative;
+  left: 30%;
+  font-size: 16px;
+  font-weight: bold;
+  height: 40px;
+  transform: translate(0, 50%);
+}
+.register_form_right {
+  position: relative;
+  font-size: 16px;
+  font-weight: bold;
+  height: 20px;
+  transform: translate(0, 50%);
+}
+
+.identification {
+  position: relative;
+  left: 50%;
+  font-size: 24px;
+  transform: translate(-50%);
+}
+
+.order_form_left {
+  position: relative;
+  left: 30%;
+  font-size: 24px;
+  font-weight: bold;
+  height: 40px;
+  transform: translate(0, 50%);
+}
+.order_form_right {
+  position: relative;
+  font-size: 24px;
+  font-weight: bold;
+  height: 30px;
+  transform: translate(0, 50%);
+}
+
+.menu_add_button {
+  text-align: center;
+}
+
+.modal_con {
+  position: absolute;
+  top: 10%;
+  left: 20%;
+  width: 60%;
+  height: 80%;
+}
+
+.modal_left {
+  position: relative;
+  top: 20px;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.modal_right {
+  width: 60%;
+}
+
+.num {
+  width: 60px;
+}
+
+.order_modal_submit {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.orders {
+  position: relative;
+  top: 20px;
+  left: calc(50% - 100px);
+}
+
+.order_submit {
+  position: relative;
+  top: 24px;
+  left: calc(50% - 100px);
+}
+
+.order_manage_button {
+  position: relative;
+  left: 10%;
+  width: 80%;
+}
