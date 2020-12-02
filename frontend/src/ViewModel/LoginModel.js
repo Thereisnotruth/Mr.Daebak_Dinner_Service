@@ -1,12 +1,16 @@
 import { UserModel } from '../Model';
 
 class LoginModel {
-  constructor(userData) {
-    this.UserModel = new UserModel(userData);
+  constructor(userId, userPw) {
+    this.UserModel = new UserModel('', userId, userPw, '', '');
   }
 
-  postLogin() {
-    this.UserModel.postLogin();
+  login() {
+    return this.UserModel.postLogin();
+  }
+
+  logout() {
+    return this.UserModel.postLogout();
   }
 }
 export default LoginModel;

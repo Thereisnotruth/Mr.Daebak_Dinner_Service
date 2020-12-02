@@ -22,6 +22,7 @@ func main() {
 		v1.POST("/order", t.Order)
 		v1.GET("/check", t.CheckOrder)
 		v1.GET("/check/:id", t.PrevOrder)
+		v1.GET("/userInfo", t.GetUserInfo)
 	}
 	router.Run(":3002")
 }

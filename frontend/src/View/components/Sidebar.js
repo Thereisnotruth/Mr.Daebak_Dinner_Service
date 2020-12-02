@@ -5,10 +5,8 @@ import { grey } from '@material-ui/core/colors';
 import { SidebarItem } from '../components';
 
 const Sidebar = (props) => {
-  const home = {
-    name: 'home',
-    path: '/'
-  }
+  const { isLogin, logout } = props;
+
   const menus = [
     { name: '주문하기', path: '/order' },
     { name: '내 정보', path: '/userinfo' },
@@ -41,11 +39,22 @@ const Sidebar = (props) => {
           )
         })
       }
-      <Link to={'/login'} className='sidebar_login_link'>
-        <OrderButton variant='contained' color='primary' className='sidebar_login_button'>
-          로그인
+      {
+        (isLogin === null)?
+          <Link to={'/login'} className='sidebar_login_link'>
+            {
+              
+              <OrderButton variant='contained' color='primary' className='sidebar_login_button'>
+                로그인
+              </OrderButton>
+              
+            }
+          </Link>
+        :
+        <OrderButton variant='contained' color='primary' className='sidebar_login_button' onClick={logout}>
+          로그아웃
         </OrderButton>
-      </Link>
+      }
     </Grid>
   );
 }

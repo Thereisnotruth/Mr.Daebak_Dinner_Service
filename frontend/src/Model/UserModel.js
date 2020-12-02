@@ -10,14 +10,32 @@ class UserModel {
   }
 
   postRegister() {
-    const res = axios.post('/v1/register', {
+    const check = axios.post('/v1/register', {
       name: this.name,
       userId: this.userId,
       userPw: this.userPw,
       address: this.address,
       identity: this.identity,
+    }).catch((e) => {
+      console.log(e);
+      return (e.response);
     });
-    return res;
+    return check;
+  }
+  postLogin() {
+    const check = axios.post('/v1/login', {
+      userId: this.userId,
+      userPw: this.userPw,
+    }).catch((e) => {
+      console.log(e);
+      return (e.response);
+    });
+    return check;
+  }
+  postLogout() {
+    const check = axios.post('/v1/logout')
+
+    return check;
   }
 }
 

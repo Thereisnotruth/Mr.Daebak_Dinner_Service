@@ -4,13 +4,20 @@ import (
 	"database/sql"
 	"fmt"
 	"net/http"
+	"time"
 
+	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 )
 
 type RequestLoginInfo struct {
 	ID       string `json:"userId" binding:"required"`
 	Password string `json:"userPw" binding:"required"`
+}
+type Claims struct {
+	ID       string
+	Identity string
+	jwt.StandardClaims
 }
 
 func Login(c *gin.Context) {
@@ -24,11 +31,34 @@ func Login(c *gin.Context) {
 		fmt.Println(err.Error())
 	}
 	defer conn.Close()
-	var user string
-	err = conn.QueryRow("select user_id from user where user_id = ? and user_pw = ?", req.ID, req.Password).Scan(&user)
+	fmt.Println(req.ID, req.Password)
+	var user_id string
+	var identity string
+	err = conn.QueryRow("select user_id, identity from user where user_id = ? and user_pw = ?", req.ID, req.Password).Scan(&user_id, &identity)
 	if err != nil {
 		c.JSON(http.StatusNotFound, err)
 	}
-	c.SetCookie("access_cookie", req.ID, 60*60, "/", "localhost:3001", false, false)
+	jwtToken, err := GetJwtToken(user_id, identity)
+	c.SetCookie("access_token", jwtToken, 60*60, "/", "localhost:3002", false, false)
 	c.JSON(http.StatusOK, gin.H{"message": "Login Success..."})
+}
+
+func GetJwtToken(userId string, identity string) (string, error) {
+	expirationTime := time.Now().Add(60 * time.Minute)
+
+	claims := &Claims{
+		ID:       userId,
+		Identity: identity,
+		StandardClaims: jwt.StandardClaims{
+			ExpiresAt: expirationTime.Unix(),
+		},
+	}
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	tokenString, err := token.SignedString([]byte("토큰"))
+	if err != nil {
+		return "", fmt.Errorf("token signed Error")
+	} else {
+		return tokenString, nil
+	}
 }
