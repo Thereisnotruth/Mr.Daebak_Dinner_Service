@@ -2,7 +2,8 @@ import React from 'react'
 import { Grid, Divider, TextField } from '@material-ui/core';
 import LoginButton from './LoginButton';
 
-const UserInfoForm = () => {
+const UserInfoForm = (props) => {
+  const { changeAddress, changeUserPw, changeCheckPw, modify, name, userId } = props;
   return (
     <Grid container>
       <Grid item xs={2} className='divider'>
@@ -16,27 +17,27 @@ const UserInfoForm = () => {
         이름
       </Grid>
       <Grid item xs={7} className='register_form_right'>
-        고태진
+        {name}
       </Grid>
       <Grid item xs={12}><br /></Grid>
       <Grid item xs={5} className='register_form_left'>
         아이디
       </Grid>
       <Grid item xs={7} className='register_form_right'>
-        paulo0614
+        {userId}
       </Grid>
       <Grid item xs={12}><br /></Grid>
       <Grid item xs={5} className='register_form_left'>
         주소
       </Grid>
       <Grid item xs={7} className='register_form_right'>
-        <TextField variant='outlined' size='small'/>
+        <TextField variant='outlined' size='small' onChange={changeAddress}/>
       </Grid>
       <Grid item xs={12}><br /></Grid>
       <Grid item xs={5} className='register_form_left'>
         비밀번호
       </Grid>
-      <Grid item xs={7} className='register_form_right'>
+      <Grid item xs={7} className='register_form_right' onChange={changeUserPw}>
         <TextField variant='outlined' type='password' size='small'/>
       </Grid>
       <Grid item xs={12}><br /></Grid>
@@ -44,13 +45,13 @@ const UserInfoForm = () => {
         비밀번호 확인
       </Grid>
       <Grid item xs={7} className='register_form_right'>
-        <TextField variant='outlined' type='password' size='small'/>
+        <TextField variant='outlined' type='password' size='small' onChange={changeCheckPw}/>
       </Grid>
       <Grid item xs={12}><br /></Grid>
       <Grid item xs={12}><br /></Grid>
       <Grid item xs={12} className='login_submit'>
-        <LoginButton variant='contained' color='primary' className='login_button'>
-          확인
+        <LoginButton variant='contained' color='primary' className='login_button' onClick={modify}>
+          수정
         </LoginButton>
       </Grid>
     </Grid>

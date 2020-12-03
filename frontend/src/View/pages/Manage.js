@@ -1,26 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { Grid } from '@material-ui/core';
-import { Menu, PrevOrder } from '../components';
-import { MainModel } from '../../ViewModel';
+import { OrderManagement } from '../components';
+import { ManageModel } from '../../ViewModel';
 
-const Main = ({history}) => {
-  const [prevOrder, setPrevOrder] = useState([]);
-
+const Manage = () => {
+  const [orders, setOrders] = useState([]);
+  const [time, setTime] = useState('');
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
- 
+  const [update, setUpdate] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       setIsError(false);
       setIsLoading(true);
 
       try {
-        const mainModel = new MainModel();
-        const check = await mainModel.getPrevOrders();
-        console.log(check);
+        const manageModel = new ManageModel();
+        const check = await manageModel.getAllOrders();
         if (check !== undefined && check.status === 200) {
-          setPrevOrder(check.data);
-          console.log(prevOrder)
+          setOrders(check.data);
+          console.log(orders)
         }
       } catch (error) {
         setIsError(true);
@@ -31,13 +30,11 @@ const Main = ({history}) => {
   }, []);
   return(
     <Grid>
-      <Menu />
-      <br />
-      <PrevOrder
-      prevOrders={prevOrder}
+      <OrderManagement
+      orders={orders}
       />
     </Grid>
   );
 }
 
-export default Main;
+export default Manage;

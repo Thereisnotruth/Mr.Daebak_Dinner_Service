@@ -4,10 +4,10 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { LoginButton, SelectNum } from '../components';
 
 const OrderModal = (props) => {
-  const { destructor } = props;
+  const { type, destructor, m, s } = props;
   const [open, setOpen] = useState(false);
-  const [menu, setMenu] = useState(-1);
-  const [style, setStyle] = useState(-1);
+  const [menu, setMenu] = useState('');
+  const [style, setStyle] = useState('');
 
   const [valentine, setValentine] = useState({
     heartPlate: 1,
@@ -144,24 +144,37 @@ const OrderModal = (props) => {
       baguette: e.target.value,
     })
   }
+
   const menuSubmit = () => {
-    if(menu === -1 || style === -1) {
+    if(menu === '' || style === '') {
       alert('선택하지 않은 항목이 있습니다.');
       return;
     }
-    if (menu === 0) destructor(valentine, style, menu);
-    if (menu === 1) destructor(french, style, menu);
-    if (menu === 2) destructor(english, style, menu);
-    if (menu === 3) destructor(champagne, style, menu);
-    setMenu(-1);
-    setStyle(-1);
+    let dinner;
+    if (menu === 'Valentine') {
+      dinner = 'heart plate: ' + valentine.heartPlate + ' napkin: ' + valentine.napkin;
+    };
+    if (menu === 'French') {
+      dinner = 'coffee: ' + french.coffee + ' wine: ' + french.wine + ' salad: ' + french.salad + ' meat: ' + french.meat;
+    };
+    if (menu === 'English') {
+      dinner = 'scramble egg: ' + english.scramble + ' bacon: ' + english.bacon + ' bread: ' + english.bread + ' steak: ' + english.steak;
+    };
+    if (menu === 'Champagne Feast') {
+      dinner = 'champagne: ' + champagne.champagne + ' coffee port: ' + champagne.coffeePort + ' baguette: ' + champagne.baguette;
+    };
+    destructor(menu, style, dinner)
     handleClose();
   }
 
   return (
     <Grid>
-      <Button className='menu_add_button' onClick={handleOpen}>
-        <AddCircleIcon fontSize='large' />
+      <Button className={type} onClick={handleOpen}>
+        {
+          (type==='menu_add_button')?
+          <AddCircleIcon fontSize='large' />
+        :<Button>{m} {s}</Button>
+        }
       </Button>
       <Modal
         open={open}
@@ -177,10 +190,10 @@ const OrderModal = (props) => {
             <FormControl  className='modal_right'>
               <InputLabel>메뉴</InputLabel>
               <Select onChange={handleMenuChange}>
-                <MenuItem value={0}>Valentine</MenuItem>
-                <MenuItem value={1}>French</MenuItem>
-                <MenuItem value={2}>English</MenuItem>
-                <MenuItem value={3}>Champagne Feast</MenuItem>
+                <MenuItem value={'Valentine'}>Valentine</MenuItem>
+                <MenuItem value={'French'}>French</MenuItem>
+                <MenuItem value={'English'}>English</MenuItem>
+                <MenuItem value={'Champagne Feast'}>Champagne Feast</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -193,11 +206,11 @@ const OrderModal = (props) => {
               <InputLabel>스타일</InputLabel>
               <Select onChange={handleStyleChange}>
                 {(menu !== 3)?
-                  <MenuItem value={0}>Simple</MenuItem>
+                  <MenuItem value={'Simple'}>Simple</MenuItem>
                   : <div></div>
                 }
-                <MenuItem value={1}>Grand</MenuItem>
-                <MenuItem value={2}>Deluxe</MenuItem>
+                <MenuItem value={'Grand'}>Grand</MenuItem>
+                <MenuItem value={'Deluxe'}>Deluxe</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -207,7 +220,7 @@ const OrderModal = (props) => {
           </Grid>
           <Grid item xs={6}>
             {
-              (menu === 0)?
+              (menu === 'Valentine')?
               <Grid item xs={6}>
                 <Grid container>
                   <Grid item xs={10} className='tag'>
@@ -221,7 +234,7 @@ const OrderModal = (props) => {
                   <SelectNum initialValue={valentine.napkin} change={valentineNapkinChange}/>
                 </Grid>
               </Grid>
-              : (menu === 1)?
+              : (menu === 'French')?
               <Grid item xs={6}>
                 <Grid container>
                   <Grid item xs={10} className='tag'>
@@ -242,7 +255,7 @@ const OrderModal = (props) => {
                   <SelectNum initialValue={french.meat} change={frenchMeatChange}/>
                 </Grid>
               </Grid>
-              : (menu === 2)?
+              : (menu === 'English')?
               <Grid item xs={6}>
                 <Grid container>
                   <Grid item xs={10} className='tag'>
@@ -263,7 +276,7 @@ const OrderModal = (props) => {
                   <SelectNum initialValue={english.steak} change={englishSteakChange}/>
                 </Grid>
               </Grid>:
-              (menu === 3)?
+              (menu === 'Champagne Feast')?
               <Grid item xs={6}>
                 <Grid container>
                   <Grid item xs={10} className='tag'>

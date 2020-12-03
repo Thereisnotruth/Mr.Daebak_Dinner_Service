@@ -36,7 +36,7 @@ func Register(c *gin.Context) {
 		return
 	}
 
-	_, err = conn.Exec("insert into user values (?, ?, ?, ?, ?);", req.Name, req.ID, req.Password, req.Address, req.Identification)
+	_, err = conn.Exec("insert into user values (?, ?, ?, ?, ?, 0);", req.Name, req.ID, req.Password, req.Address, req.Identification)
 	if err != nil {
 		c.JSON(http.StatusBadGateway, err)
 	}

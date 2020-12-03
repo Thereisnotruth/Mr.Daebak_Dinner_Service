@@ -19,10 +19,12 @@ func main() {
 		v1.POST("/login", t.Login)
 		v1.POST("/register", t.Register)
 		v1.POST("/logout", t.Logout)
-		v1.POST("/order", t.Order)
-		v1.GET("/check", t.CheckOrder)
-		v1.GET("/check/:id", t.PrevOrder)
+		v1.POST("/order", t.PostOrder)
+		v1.POST("/userInfo", t.ModifyUserInfo)
+		v1.POST("/manage/:time", t.Done)
+		v1.GET("/order", t.GetOrder)
 		v1.GET("/userInfo", t.GetUserInfo)
+		v1.GET("/manage", t.Manage)
 	}
 	router.Run(":3002")
 }

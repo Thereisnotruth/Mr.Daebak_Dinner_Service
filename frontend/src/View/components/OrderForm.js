@@ -2,45 +2,22 @@ import React, { useState, useEffect } from 'react'
 import { Grid, Divider, TextField } from '@material-ui/core';
 import { OrderModal, LoginButton } from '../components';
 
-const OrderForm = () => {
-  const [menus, setMenus] = useState([])
-  const [update, setUpdate] = useState(false)
-
-  const accum = (dinner, style, menu) => {
-    let tmp = menus
-    tmp.push({ menu, style, dinner })
-    setMenus(tmp)
-    setUpdate(!update)
-  }
-
-  useEffect(() => {
-    console.log('test')
-  }, [update]);
+const OrderForm = (props) => {
+  const { order, changeAddress, changeDetails, destructor, submitOrder } = props;
+  const menus = order;
 
   const recipeList = () => {
     let result = [];
     let m;
     let s;
+    let d;
     menus.map(element => {
-      if (element.menu === 0) {
-        m = 'valentine';
-      } else if(element.menu === 1) {
-        m = 'french';
-      } else if(element.menu === 2) {
-        m = 'english';
-      } else {
-        m = 'champagne feast';
-      }
-      if (element.style === 0) {
-        s = 'simple';
-      } else if(element.style === 1) {
-        s = 'grand';
-      } else {
-        s = 'deluxe';
-      }
+      m = element.menu;
+      s = element.style;
+      d = element.dinner;
       result.push(
-        <Grid item xs={12} className='orders'>
-          {m} {s}
+        <Grid item xs={12} type={'accum'}>
+          <div className='orders'>{m} &nbsp;/ {s} / {d}</div>
         </Grid>
       );
     });
@@ -59,7 +36,7 @@ const OrderForm = () => {
         메뉴
       </Grid>
       <Grid item xs={7} className='order_form_right'>
-        <OrderModal destructor={accum}></OrderModal>
+        <OrderModal type={'menu_add_button'} destructor={destructor}></OrderModal>
       </Grid>
       {recipeList()}
       <Grid item xs={12}><br /></Grid>
@@ -67,16 +44,16 @@ const OrderForm = () => {
         주소
       </Grid>
       <Grid item xs={7} className='order_form_right'>
-        <TextField variant='outlined' size='small'/>
+        <TextField variant='outlined' size='small' onChange={changeAddress}/>
       </Grid>
       <Grid item xs={12}><br /></Grid>
       <Grid item xs={5} className='order_form_left'>
         요청사항
       </Grid>
       <Grid item xs={7} className='order_form_right'>
-        <TextField variant='outlined' size='small'/>
+        <TextField variant='outlined' size='small' onChange={changeDetails}/>
       </Grid>
-      <LoginButton variant='contained' color='primary' className='order_submit'>주문하기</LoginButton>
+      <LoginButton variant='contained' color='primary' className='order_submit' onClick={submitOrder}>주문하기</LoginButton>
     </Grid>
   );
 }

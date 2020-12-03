@@ -1,19 +1,36 @@
 import axios from 'axios';
+import getCurrentDate from '../utils/CurrTime';
 
 class OrderModel {
-  constructor(order) {
-    this.menu = order.menu;
-    this.style = order.style;
-    this.address = order.address;
-    this.datail = order.detail;
+  constructor(order, address, details) {
+    this.order = order;
+    this.address = address;
+    this.details = details;
   }
   postOrder() {
-    this.order = axios.post('/v1/order/:id', {
-      menu: this.menu,
-      style: this.style,
+    const date = getCurrentDate();
+
+    const check =  axios.post('/v1/order', {
+      order: this.order,
       address: this.address,
-      detail: this.detail,
-    })
+      details: this.details,
+      orderTime: date,
+    });
+    return check;
+  }
+  getPrevOrders() {
+    const check = axios.get('/v1/order');
+
+    return check;
+  }
+  getAllOrders() {
+    const check = axios.get('/v1/manage');
+
+    return check;
+  }
+  done(time) {
+    const check = axios.post('/v1/manage/' + time);
+    return check;
   }
 }
 

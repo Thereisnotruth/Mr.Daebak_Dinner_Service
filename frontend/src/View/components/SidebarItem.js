@@ -1,10 +1,10 @@
 import React from 'react'
 
 const SidebarItem = (props) => {
-  const { item } = props;
+  const { name } = props;
   return (
     <div className='sidebar_item'>
-      <p>{item.name}</p>
+      <p>{name}</p>
     </div>
   );
 }
