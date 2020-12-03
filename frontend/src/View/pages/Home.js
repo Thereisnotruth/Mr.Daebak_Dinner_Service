@@ -5,13 +5,13 @@ import { Header, Sidebar } from '../components';
 import GetToken from '../../utils/GetToken';
 import { LoginModel } from '../../ViewModel';
 
-const Home = () => {
+const Home = ({history}) => {
   const isLogin = GetToken('access_token');
 
   const logout = () => {
     const loginModel = new LoginModel();
     loginModel.logout();
-    window.location.href = '/main';
+    history.push('/main')
   }
 
   return ( 

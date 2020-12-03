@@ -3,11 +3,13 @@ package main
 import (
 	"github.com/Thereisnotruth/Mr.Daebak_Dinner_Service/pkg/db"
 	t "github.com/Thereisnotruth/Mr.Daebak_Dinner_Service/pkg/v1"
+	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	router := gin.Default()
+	router.Use(static.Serve("/", static.LocalFile("../../frontend/build", true)))
 	db.DBInit()
 	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{

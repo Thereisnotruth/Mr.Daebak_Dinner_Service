@@ -45,8 +45,9 @@ func GetUserInfo(c *gin.Context) {
 	var userPw string
 	var address string
 	var identity string
+	var orders int
 	var userInfo UserInfo
-	err = conn.QueryRow("SELECT * FROM user where user_id=?", claims.ID).Scan(&name, &userId, &userPw, &address, &identity)
+	err = conn.QueryRow("SELECT * FROM user where user_id=?", claims.ID).Scan(&name, &userId, &userPw, &address, &identity, &orders)
 	if err != nil {
 		c.JSON(http.StatusNotFound, err)
 	}
@@ -55,7 +56,6 @@ func GetUserInfo(c *gin.Context) {
 	userInfo.ID = userId
 	userInfo.Address = address
 	userInfo.Identity = identity
-
 	c.JSON(http.StatusOK, userInfo)
 }
 

@@ -20,6 +20,7 @@ const UserInfo = ({history}) => {
       history.push('/login');
     }
     const info = await userInfoModel.getUserInfo();
+    console.log(info);
     setName(info.data.name);
     setUserId(info.data.userId);
     setIdentity(info.data.identity);
